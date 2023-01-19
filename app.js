@@ -19,7 +19,10 @@ document.querySelector('#score-1').textContent = 0;
 document.querySelector('#current-1').textContent = 0;
 
 // a játék indításakor a kocka még nem látszik:
-document.querySelector('.dice').style.display = 'none'; 
+document.querySelector('#dice-1').style.display = 'none'; 
+document.querySelector('#dice-2').style.display = 'none'; 
+
+
 document.querySelector('.btn-hold').style.display = 'block';
 document.querySelector('.btn-roll').style.display = 'block';
 
@@ -39,16 +42,20 @@ newGame();
 // a kocka dobás, gombra kattintás
 document.querySelector('.btn-roll').addEventListener('click', function () {
     //1. generálunk egy véletlen számot 1-6 között
-    const dice = Math.floor(Math.random() * 6) + 1; 
+    const diceOne = Math.floor(Math.random() * 6) + 1; 
+    const diceTwo = Math.floor(Math.random() * 6) + 1; 
+
     //2. jelenítsük meg az UI-on:
-    document.querySelector('.dice').style.display = 'block'; // láthatóvá tesszük
-    
-    document.querySelector('.dice').setAttribute('src', `dice-${dice}.png`); 
+    document.querySelector('#dice-1').style.display = 'block'; // láthatóvá tesszük
+    document.querySelector('#dice-2').style.display = 'block'; // láthatóvá tesszük
+
+    document.querySelector('.dice').setAttribute('src', `dice-${diceOne}.png`); 
+    document.querySelector('.dice').setAttribute('src', `dice-${diceTwo}.png`); 
     
     // Ha nem egy a dobott érték akkor felírjuk a pontszámot és ugyanaz a játékos dobhat újra 
     // elágazás:
-    if (dice !== 1) {
-        roundScore = roundScore + dice;
+    if (diceOne !== 1 && diceTwo !== 1) {
+        roundScore = roundScore + diceOne + diceTwo;
         // A UI-on megjelenítjük az eredményt:
         document.querySelector('#current-'+activePlayer).textContent = roundScore;
     } else {
