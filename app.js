@@ -1,5 +1,5 @@
 //változó deklarálás
-let scores, roundScore, activePlayer
+let scores, roundScore, activePlayer, finalScore
 
 function newGame () {
 // játékosok pontszámai, mindkét játékos nulla ponttal indul
@@ -31,6 +31,12 @@ document.querySelector('.player-1-panel').classList.remove('winner');
 
 document.querySelector('.player-1-panel').classList.remove('active');
 document.querySelector('.player-0-panel').classList.add('active');
+
+if (document.querySelector('.final-score').value) {
+    finalScore = document.querySelector('.final-score').value;
+} else {
+    finalScore = 100;
+    }
 }
 
 newGame();
@@ -80,7 +86,7 @@ document.querySelector('.btn-hold').addEventListener('click', function () {
     document.querySelector('#score-'+activePlayer).textContent = scores[activePlayer];
 
     // 3. meg kell nézni van-e nyertes, mivel 20 pontig megy a játék
-    if (scores[activePlayer] >= 20) {
+    if (scores[activePlayer] >= finalScore) {
         document.querySelector(`.player-${activePlayer}-panel`).classList.add('winner'); 
         document.querySelector(`.player-${activePlayer}-panel`).classList.remove('active'); 
     
